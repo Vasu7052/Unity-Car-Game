@@ -5,7 +5,6 @@ public class SpawnRandom : MonoBehaviour {
 
 	public GameObject cameraObject ;
 	public GameObject[] obstacles;
-	public Vector3 spawnValues ;
 	public float spawnWait;
 	public float spawnMostWait ;
 	public float spawnLeastWait ;
@@ -16,12 +15,12 @@ public class SpawnRandom : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		StartCoroutine (Spawner ());
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		spawnWait = Random.Range (spawnLeastWait,spawnMostWait);
 	}
 
 	IEnumerator Spawner(){
@@ -29,8 +28,9 @@ public class SpawnRandom : MonoBehaviour {
 
 		while(!stop){
 			randObstacle = Random.Range (0, 2);
-			Vector3 spawnPos = new Vector3 (Random.Range(-8,8),6,cameraObject.transform.position.z+3);
-			Instantiate (obstacles[randObstacle],spawnPos+transform.TransformPoint(0,0,0));
+			Vector3 spawnPos = new Vector3 (Random.Range(-4,4),6,cameraObject.transform.position.z+2);
+			Instantiate (obstacles[randObstacle],spawnPos+transform.TransformPoint(0,0,0),gameObject.transform.rotation);
+			yield return new WaitForSeconds (spawnWait);
 		}
 
 	}
