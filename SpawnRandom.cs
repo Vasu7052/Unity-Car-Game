@@ -31,15 +31,27 @@ public class SpawnRandom : MonoBehaviour {
 		yield return new WaitForSeconds (startWait);
 
 		while(!stop){
-			randObstacle = Random.Range (0, 2);
-			Vector3 spawnPos = new Vector3 (insidePositions[Random.Range(0,3)],6,cameraObject.transform.position.z+2);
-			Debug.Log (spawnPos);
-			GameObject newSapwnObject = Instantiate (obstacles[randObstacle],spawnPos,gameObject.transform.rotation) as GameObject ;
-			if(randObstacle == 0){
+			randObstacle = Random.Range (0, 4);
+			Vector3 spawnPos;
+			GameObject newSapwnObject;
+
+			if(randObstacle == 0 || randObstacle == 1){
+				spawnPos = new Vector3 (insidePositions[Random.Range(0,3)],6,cameraObject.transform.position.z+2);
+				newSapwnObject = Instantiate (obstacles[randObstacle],spawnPos,gameObject.transform.rotation) as GameObject ;
 				newSapwnObject.transform.localScale = new Vector3 (1f,1f,1f);
-			}else if(randObstacle == 1){
+			}else if(randObstacle == 2){
+				spawnPos = new Vector3 (insidePositions[Random.Range(0,3)],6,cameraObject.transform.position.z+2);
+				newSapwnObject = Instantiate (obstacles[randObstacle],spawnPos,gameObject.transform.rotation) as GameObject ;
 				newSapwnObject.transform.localScale = new Vector3 (1f,1.5f,0.5f);
+			}else if(randObstacle == 3){
+				spawnPos = new Vector3 (insidePositions[Random.Range(0,3)],8,cameraObject.transform.position.z+2);
+				newSapwnObject = Instantiate (obstacles[randObstacle],spawnPos,gameObject.transform.rotation) as GameObject ;
+				newSapwnObject.transform.localScale = new Vector3 (1f,1f,1f);
 			}
+
+
+
+
 
 			randSideObjects = Random.Range (0, 1);
 			Vector3 outsideSpawnPos = new Vector3 (outsidePositions[Random.Range(0,2)],3.5f,cameraObject.transform.position.z+5);
