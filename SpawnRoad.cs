@@ -7,6 +7,7 @@ public class SpawnRoad : MonoBehaviour {
 	public float lengthOfTrack = 30f ;
 	public GameObject[] roads ;
 	int randRoad ;
+	bool isTriggered=false ;
 
 	// Use this for initialization
 	void Start () {
@@ -15,24 +16,26 @@ public class SpawnRoad : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		currentTrackNumber = gameObject.transform.position.z / lengthOfTrack;
-		currentTrackNumber = Mathf.Ceil (currentTrackNumber);
-		if(gameObject.transform.position.z > ((currentTrackNumber*lengthOfTrack)-25) && gameObject.transform.position.z < ((currentTrackNumber*lengthOfTrack)-24)){
-			randRoad = Random.Range (0, 3);
-			GameObject spawnRoad = Instantiate (roads[randRoad] , new Vector3(0f,6f,((currentTrackNumber)*lengthOfTrack)) , gameObject.transform.rotation) as GameObject;
-			spawnRoad.transform.localScale = new Vector3 (1f,1f,1f);
-		}
-
-	}
-
-	void OnCollisionEnter(Collider col){
-		if(col.gameObject.name == "SpawnBar"){
-			Debug.Log ("Triggered");
-		}
+		
 	}
 
 	void OnTriggerEnter(Collider col){
+		if(col.gameObject.name == "SpawnBar"){
+			if (isTriggered)
+				return;
 			Debug.Log ("Triggered1");
+			currentTrackNumber = gameObject.transform.position.z / lengthOfTrack;
+			currentTrackNumber = Mathf.Ceil (currentTrackNumber);
+			if(currentTrackNumber <= 0f){
+				currentTrackNumber = 1f;
+			}
+			randRoad = Random.Range (0, 2);
+			GameObject spawnRoad = Instantiate (roads[randRoad] , new Vector3(0f,6f,(currentTrackNumber*lengthOfTrack)) , gameObject.transform.rotation) as GameObject;
+			Debug.Log (currentTrackNumber*lengthOfTrack);
+			spawnRoad.transform.localScale = new Vector3 (1f,1f,1f);
+			Destroy (col.gameObject);
+			isTriggered = true;
+		}
 	}
 
 
