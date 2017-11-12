@@ -16,11 +16,11 @@ public class CarController : MonoBehaviour {
 	void Update () {
 		MoveObj ();
 
-		if (Input.GetKeyDown (KeyCode.A)) {
+		if (Input.GetKey(KeyCode.LeftArrow)) {
 			moveLeft ();
 		}
 
-		if (Input.GetKeyDown (KeyCode.S)) {
+		if (Input.GetKey(KeyCode.RightArrow)) {
 			moveRight ();
 		}
 	}

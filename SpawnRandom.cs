@@ -20,6 +20,7 @@ public class SpawnRandom : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (Spawner ());
+		StartCoroutine (OutsideSpawner ());
 	}
 	
 	// Update is called once per frame
@@ -50,18 +51,23 @@ public class SpawnRandom : MonoBehaviour {
 			}
 
 
-
-
-
-			randSideObjects = Random.Range (0, 1);
-			Vector3 outsideSpawnPos = new Vector3 (outsidePositions[Random.Range(0,2)],3.5f,cameraObject.transform.position.z+5);
-			GameObject newOutsideSapwnObject = Instantiate (outsideObstacles[randSideObjects], outsideSpawnPos, gameObject.transform.rotation) as GameObject;
-			newOutsideSapwnObject.transform.localScale = new Vector3 (2f,2f,2f);
-
 			yield return new WaitForSeconds (spawnWait);
 		}
 
 	}
+
+	IEnumerator OutsideSpawner(){
+		yield return new WaitForSeconds (1);
+		while(!stop){
+			randSideObjects = Random.Range (0, 1);
+			Vector3 outsideSpawnPos = new Vector3 (outsidePositions[Random.Range(0,2)],3.5f,cameraObject.transform.position.z+5);
+			GameObject newOutsideSapwnObject = Instantiate (outsideObstacles[randSideObjects], outsideSpawnPos, gameObject.transform.rotation) as GameObject;
+			newOutsideSapwnObject.transform.localScale = new Vector3 (2f,2f,2f);
+			yield return new WaitForSeconds (1);
+		}
+
+	}
+
 
 }
 
