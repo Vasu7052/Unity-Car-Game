@@ -5,15 +5,17 @@ public class SpawnRandom : MonoBehaviour {
 
 	public GameObject cameraObject ;
 	public GameObject[] obstacles;
+	public GameObject[] outsideObstacles; 
 	public float spawnWait;
 	public float spawnMostWait ;
 	public float spawnLeastWait ;
 	public int startWait;
 	public bool stop ;
 
-	int randObstacle ;
+	int randObstacle,randSideObjects;
 
 	float[] insidePositions = {-2.5f,0f,2.5f};
+	float[] outsidePositions = {-6.5f,6.5f};
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +40,12 @@ public class SpawnRandom : MonoBehaviour {
 			}else if(randObstacle == 1){
 				newSapwnObject.transform.localScale = new Vector3 (1f,1.5f,0.5f);
 			}
+
+			randSideObjects = Random.Range (0, 1);
+			Vector3 outsideSpawnPos = new Vector3 (outsidePositions[Random.Range(0,2)],3.5f,cameraObject.transform.position.z+5);
+			GameObject newOutsideSapwnObject = Instantiate (outsideObstacles[randSideObjects], outsideSpawnPos, gameObject.transform.rotation) as GameObject;
+			newOutsideSapwnObject.transform.localScale = new Vector3 (2f,2f,2f);
+
 			yield return new WaitForSeconds (spawnWait);
 		}
 
