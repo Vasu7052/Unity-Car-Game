@@ -13,6 +13,8 @@ public class SpawnRandom : MonoBehaviour {
 
 	int randObstacle ;
 
+	int insidePositions = {-2.5,0,2.5};
+
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (Spawner ());
@@ -28,8 +30,14 @@ public class SpawnRandom : MonoBehaviour {
 
 		while(!stop){
 			randObstacle = Random.Range (0, 2);
-			Vector3 spawnPos = new Vector3 (Random.Range(-4,4),6,cameraObject.transform.position.z+2);
-			Instantiate (obstacles[randObstacle],spawnPos+transform.TransformPoint(0,0,0),gameObject.transform.rotation);
+			Vector3 spawnPos = new Vector3 (insidePositions[Random.Range(0,3)],6,cameraObject.transform.position.z+2);
+			Debug.Log (spawnPos);
+			GameObject newSapwnObject = Instantiate (obstacles[randObstacle],spawnPos,gameObject.transform.rotation) as GameObject ;
+			if(randObstacle == 0){
+				newSapwnObject.transform.localScale = new Vector3 (1f,1f,1f);
+			}else if(randObstacle == 1){
+				newSapwnObject.transform.localScale = new Vector3 (1f,1.5f,0.5f);
+			}
 			yield return new WaitForSeconds (spawnWait);
 		}
 
