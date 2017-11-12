@@ -13,7 +13,7 @@ public class SpawnRandom : MonoBehaviour {
 
 	int randObstacle ;
 
-	int insidePositions = {-2.5,0,2.5};
+	float[] insidePositions = {-2.5f,0f,2.5f};
 
 	// Use this for initialization
 	void Start () {
