@@ -29,9 +29,34 @@ public class SpawnRandom : MonoBehaviour {
 
 		while(!stop){
 			randObstacle = Random.Range (0, 2);
-			Vector3 spawnPos = new Vector3 (Random.Range(-spawnValues.x,spawnValues.x),6,cameraObject.transform.position.z+3);
+			Vector3 spawnPos = new Vector3 (Random.Range(-8,8),6,cameraObject.transform.position.z+3);
+			Instantiate (obstacles[randObstacle],spawnPos+transform.TransformPoint(0,0,0));
 		}
 
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
