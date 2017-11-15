@@ -4,7 +4,7 @@ using System.Collections;
 public class SpawnRoad : MonoBehaviour {
 
 	float currentTrackNumber;
-	public float lengthOfTrack = 30f ;
+	public float lengthOfTrack ;
 	public GameObject[] roads ;
 	int randRoad ;
 	bool isTriggered=false ;
@@ -20,7 +20,7 @@ public class SpawnRoad : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col){
-		if(col.gameObject.name == "SpawnBar"){
+		if(col.tag == "SpawnBar"){
 			if (isTriggered)
 				return;
 			Debug.Log ("Triggered1");
@@ -35,6 +35,7 @@ public class SpawnRoad : MonoBehaviour {
 			spawnRoad.transform.localScale = new Vector3 (1f,1f,1f);
 			Destroy (col.gameObject);
 			isTriggered = true;
+			System.Threading.Thread.Sleep (2000);
 		}
 	}
 
